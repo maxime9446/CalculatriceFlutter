@@ -26,6 +26,7 @@ class _CalculatorState extends State<Calculator> {
   bool isSubtractSelected = false;
   bool isMultiplySelected = false;
   bool isDivideSelected = false;
+  bool isClearMode = true;
 
   Widget calcbuttom(String btntxt, Color btncolor, Color txtcolor) {
     bool isSelected = false;
@@ -39,6 +40,10 @@ class _CalculatorState extends State<Calculator> {
       isSelected = isDivideSelected;
     }
 
+    if (btntxt == 'AC' && !isClearMode) {
+      btntxt = 'C';
+    }
+
     return Container(
       height: 80,
       width: 80,
@@ -50,6 +55,11 @@ class _CalculatorState extends State<Calculator> {
         onPressed: () {
           setState(() {
             calculation(btntxt);
+            if (btntxt == 'C') {
+              isClearMode = true;
+            } else {
+              isClearMode = false;
+            }
             isAddSelected = btntxt == '+' ? true : false;
             isSubtractSelected = btntxt == '-' ? true : false;
             isMultiplySelected = btntxt == 'x' ? true : false;
@@ -96,7 +106,7 @@ class _CalculatorState extends State<Calculator> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                calcbuttom('AC', Colors.grey, Colors.black),
+                calcbuttom(isClearMode ? 'AC' : 'C', Colors.grey, Colors.black),
                 calcbuttom('+/-', Colors.grey, Colors.black),
                 calcbuttom('%', Colors.grey, Colors.black),
                 calcbuttom('÷', Colors.amber.shade700, Colors.white),
@@ -167,7 +177,6 @@ class _CalculatorState extends State<Calculator> {
                 calcbuttom('=', Colors.amber.shade700, Colors.white),
               ],
             ),
-
             const SizedBox(
               height: 10,
             ),
@@ -195,6 +204,10 @@ class _CalculatorState extends State<Calculator> {
       finalResult = '0';
       opr = '';
       preOpr = '';
+    } else if (btnText == 'C') {
+      result = '';
+      finalResult = '0';
+      isClearMode = true;
     } else if (opr == '=' && btnText == '=') {
       if (preOpr == '+') {
         finalResult = add();
@@ -242,7 +255,12 @@ class _CalculatorState extends State<Calculator> {
           : result = '-' + result.toString();
       finalResult = result;
     } else {
-      result = result + btnText;
+      if (isClearMode) {
+        result = btnText;
+        isClearMode = false;
+      } else {
+        result = result + btnText;
+      }
       finalResult = result;
     }
 
