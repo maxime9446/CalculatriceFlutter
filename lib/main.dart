@@ -78,6 +78,42 @@ class _CalculatorState extends State<Calculator> {
                 calcbuttom('÷', Colors.amber.shade700, Colors.white),
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                calcbuttom('7', Colors.grey.shade800, Colors.white),
+                calcbuttom('8', Colors.grey.shade800, Colors.white),
+                calcbuttom('9', Colors.grey.shade800, Colors.white),
+                calcbuttom('x', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                calcbuttom('6', Colors.grey.shade800, Colors.white),
+                calcbuttom('5', Colors.grey.shade800, Colors.white),
+                calcbuttom('4', Colors.grey.shade800, Colors.white),
+                calcbuttom('-', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                calcbuttom('1', Colors.grey.shade800, Colors.white),
+                calcbuttom('2', Colors.grey.shade800, Colors.white),
+                calcbuttom('3', Colors.grey.shade800, Colors.white),
+                calcbuttom('+', Colors.amber.shade700, Colors.white),
+              ],
+            ),
           ], 
         ),
         
