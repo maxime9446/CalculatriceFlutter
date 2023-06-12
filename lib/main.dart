@@ -135,7 +135,7 @@ class _CalculatorState extends State<Calculator> {
                     ),
                   ),
                 ),
-                calcbuttom('.', Colors.grey.shade800, Colors.white),
+                calcbuttom(',', Colors.grey.shade800, Colors.white),
                 calcbuttom('=', Colors.amber.shade700, Colors.white),
               ],
             ),
