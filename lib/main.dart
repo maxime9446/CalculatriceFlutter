@@ -22,8 +22,14 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-    @override
+  @override
   Widget build(BuildContext context) {
-    return Container(); 
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: const Text('Calculator'),
+        backgroundColor: Colors.black,
+      ),
+    );
   }
 }
