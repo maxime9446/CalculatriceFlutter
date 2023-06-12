@@ -82,7 +82,7 @@ class _CalculatorState extends State<Calculator> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('Calculator'),
+        title: const Text(''),
         backgroundColor: Colors.black,
       ),
       body: Padding(
