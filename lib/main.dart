@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -24,23 +22,55 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
+  bool isAddSelected = false;
+  bool isSubtractSelected = false;
+  bool isMultiplySelected = false;
+  bool isDivideSelected = false;
+  bool isClearMode = true;
+
   Widget calcbuttom(String btntxt, Color btncolor, Color txtcolor) {
+    bool isSelected = false;
+    if (btntxt == '+') {
+      isSelected = isAddSelected;
+    } else if (btntxt == '-') {
+      isSelected = isSubtractSelected;
+    } else if (btntxt == 'x') {
+      isSelected = isMultiplySelected;
+    } else if (btntxt == '÷') {
+      isSelected = isDivideSelected;
+    }
+
+    if (btntxt == 'AC' && !isClearMode) {
+      btntxt = 'C';
+    }
+
     return Container(
       height: 80,
       width: 80,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: btncolor,
+          primary: isSelected ? Colors.white : btncolor,
           shape: const CircleBorder(),
         ),
         onPressed: () {
-          calculation(btntxt);
+          setState(() {
+            calculation(btntxt);
+            if (btntxt == 'C') {
+              isClearMode = true;
+            } else {
+              isClearMode = false;
+            }
+            isAddSelected = btntxt == '+' ? true : false;
+            isSubtractSelected = btntxt == '-' ? true : false;
+            isMultiplySelected = btntxt == 'x' ? true : false;
+            isDivideSelected = btntxt == '÷' ? true : false;
+          });
         },
         child: Text(
           btntxt,
           style: TextStyle(
-            fontSize: 35,
-            color: txtcolor,
+            fontSize: 25,
+            color: isSelected ? btncolor : txtcolor,
           ),
         ),
       ),
@@ -76,10 +106,10 @@ class _CalculatorState extends State<Calculator> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                calcbuttom('AC', Colors.grey, Colors.black),
+                calcbuttom(isClearMode ? 'AC' : 'C', Colors.grey, Colors.black),
                 calcbuttom('+/-', Colors.grey, Colors.black),
                 calcbuttom('%', Colors.grey, Colors.black),
-                calcbuttom('/', Colors.amber.shade700, Colors.white),
+                calcbuttom('÷', Colors.amber.shade700, Colors.white),
               ],
             ),
             const SizedBox(
@@ -130,16 +160,20 @@ class _CalculatorState extends State<Calculator> {
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.fromLTRB(34, 20, 128, 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      calculation('0');
+                    });
+                  },
                   child: const Text(
                     '0',
                     style: TextStyle(
-                      fontSize: 35,
+                      fontSize: 25,
                       color: Colors.white,
                     ),
                   ),
                 ),
-                calcbuttom('.', Colors.grey.shade800, Colors.white),
+                calcbuttom(',', Colors.grey.shade800, Colors.white),
                 calcbuttom('=', Colors.amber.shade700, Colors.white),
               ],
             ),
@@ -170,6 +204,10 @@ class _CalculatorState extends State<Calculator> {
       finalResult = '0';
       opr = '';
       preOpr = '';
+    } else if (btnText == 'C') {
+      result = '';
+      finalResult = '0';
+      isClearMode = true;
     } else if (opr == '=' && btnText == '=') {
       if (preOpr == '+') {
         finalResult = add();
@@ -177,13 +215,13 @@ class _CalculatorState extends State<Calculator> {
         finalResult = sub();
       } else if (preOpr == 'x') {
         finalResult = mul();
-      } else if (preOpr == '/') {
+      } else if (preOpr == '÷') {
         finalResult = div();
       }
     } else if (btnText == '+' ||
         btnText == '-' ||
         btnText == 'x' ||
-        btnText == '/' ||
+        btnText == '÷' ||
         btnText == '=') {
       if (numOne == 0) {
         numOne = double.parse(result);
@@ -197,7 +235,7 @@ class _CalculatorState extends State<Calculator> {
         finalResult = sub();
       } else if (opr == 'x') {
         finalResult = mul();
-      } else if (opr == '/') {
+      } else if (opr == '÷') {
         finalResult = div();
       }
       preOpr = opr;
@@ -217,7 +255,12 @@ class _CalculatorState extends State<Calculator> {
           : result = '-' + result.toString();
       finalResult = result;
     } else {
-      result = result + btnText;
+      if (isClearMode) {
+        result = btnText;
+        isClearMode = false;
+      } else {
+        result = result + btnText;
+      }
       finalResult = result;
     }
 
