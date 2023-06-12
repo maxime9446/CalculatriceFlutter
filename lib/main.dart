@@ -178,7 +178,7 @@ class _CalculatorState extends State<Calculator> {
                     ),
                   ),
                 ),
-                calcbuttom(',', Colors.grey.shade800, Colors.white),
+                calcbuttom('.', Colors.grey.shade800, Colors.white),
                 calcbuttom('=', Colors.amber.shade700, Colors.white),
               ],
             ),
@@ -230,9 +230,9 @@ class _CalculatorState extends State<Calculator> {
         btnText == '=') {
       if (result.isNotEmpty) {
         if (numOne == 0) {
-          numOne = double.parse(result);
+          numOne = double.parse(result.replaceAll(',', '.'));
         } else {
-          numTwo = double.parse(result);
+          numTwo = double.parse(result.replaceAll(',', '.'));
         }
       }
 
