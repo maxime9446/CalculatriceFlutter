@@ -59,7 +59,7 @@ class _CalculatorState extends State<Calculator> {
         child: Text(
           btntxt,
           style: TextStyle(
-            fontSize: 35,
+            fontSize: 25,
             color: isSelected ? btncolor : txtcolor,
           ),
         ),
@@ -150,19 +150,24 @@ class _CalculatorState extends State<Calculator> {
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.fromLTRB(34, 20, 128, 20),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      calculation('0');
+                    });
+                  },
                   child: const Text(
                     '0',
                     style: TextStyle(
-                      fontSize: 35,
+                      fontSize: 25,
                       color: Colors.white,
                     ),
                   ),
                 ),
-                calcbuttom('.', Colors.grey.shade800, Colors.white),
+                calcbuttom(',', Colors.grey.shade800, Colors.white),
                 calcbuttom('=', Colors.amber.shade700, Colors.white),
               ],
             ),
+
             const SizedBox(
               height: 10,
             ),
