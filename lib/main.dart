@@ -86,22 +86,27 @@ class _CalculatorState extends State<Calculator> {
         backgroundColor: Colors.black,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(
-                    "$text",
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(color: Colors.white, fontSize: 100),
+            Container(
+              height: 120, // Remplacez la valeur 120 par la hauteur souhaitée
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                reverse: true,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      "$text",
+                      textAlign: TextAlign.left,
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 100),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -230,6 +235,7 @@ class _CalculatorState extends State<Calculator> {
           numTwo = double.parse(result);
         }
       }
+
       if (opr == '+') {
         finalResult = add();
       } else if (opr == '-') {
