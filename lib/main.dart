@@ -22,8 +22,130 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-    @override
+    Widget calcbuttom(String btntxt, Color btncolor, Color txtcolor) {
+    return Container(
+      height: 80,
+      width: 80,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: btncolor,
+          shape: const CircleBorder(),
+        ),
+        onPressed: () {
+        },
+        child: Text(
+          btntxt,
+          style: TextStyle(
+            fontSize: 35,
+            color: txtcolor,
+          ),
+        ),
+      ),
+    );
+  }
+  @override
   Widget build(BuildContext context) {
-    return Container(); 
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: const Text('Calculator'),
+        backgroundColor: Colors.black,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "test",
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(color: Colors.white, fontSize: 100),
+                  ),
+                ),
+              ],
+            ),
+             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                calcbuttom('C', Colors.grey, Colors.black),
+                calcbuttom('+/-', Colors.grey, Colors.black),
+                calcbuttom('%', Colors.grey, Colors.black),
+                calcbuttom('÷', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                calcbuttom('7', Colors.grey.shade800, Colors.white),
+                calcbuttom('8', Colors.grey.shade800, Colors.white),
+                calcbuttom('9', Colors.grey.shade800, Colors.white),
+                calcbuttom('x', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                calcbuttom('6', Colors.grey.shade800, Colors.white),
+                calcbuttom('5', Colors.grey.shade800, Colors.white),
+                calcbuttom('4', Colors.grey.shade800, Colors.white),
+                calcbuttom('-', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                calcbuttom('1', Colors.grey.shade800, Colors.white),
+                calcbuttom('2', Colors.grey.shade800, Colors.white),
+                calcbuttom('3', Colors.grey.shade800, Colors.white),
+                calcbuttom('+', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+             const SizedBox(
+              height: 10,
+            ),
+ Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey.shade800,
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.fromLTRB(34, 20, 128, 20),
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    '0',
+                    style: TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                calcbuttom(',', Colors.grey.shade800, Colors.white),
+                calcbuttom('=', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+                        const SizedBox(
+              height: 10,
+            ),
+          ], 
+        ),
+        
+      ),
+    );
   }
 }
