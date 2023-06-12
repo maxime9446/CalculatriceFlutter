@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -24,23 +22,45 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
+  bool isAddSelected = false;
+  bool isSubtractSelected = false;
+  bool isMultiplySelected = false;
+  bool isDivideSelected = false;
+
   Widget calcbuttom(String btntxt, Color btncolor, Color txtcolor) {
+    bool isSelected = false;
+    if (btntxt == '+') {
+      isSelected = isAddSelected;
+    } else if (btntxt == '-') {
+      isSelected = isSubtractSelected;
+    } else if (btntxt == 'x') {
+      isSelected = isMultiplySelected;
+    } else if (btntxt == '÷') {
+      isSelected = isDivideSelected;
+    }
+
     return Container(
       height: 80,
       width: 80,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: btncolor,
+          primary: isSelected ? Colors.white : btncolor,
           shape: const CircleBorder(),
         ),
         onPressed: () {
-          calculation(btntxt);
+          setState(() {
+            calculation(btntxt);
+            isAddSelected = btntxt == '+' ? true : false;
+            isSubtractSelected = btntxt == '-' ? true : false;
+            isMultiplySelected = btntxt == 'x' ? true : false;
+            isDivideSelected = btntxt == '÷' ? true : false;
+          });
         },
         child: Text(
           btntxt,
           style: TextStyle(
             fontSize: 35,
-            color: txtcolor,
+            color: isSelected ? btncolor : txtcolor,
           ),
         ),
       ),
@@ -79,7 +99,7 @@ class _CalculatorState extends State<Calculator> {
                 calcbuttom('AC', Colors.grey, Colors.black),
                 calcbuttom('+/-', Colors.grey, Colors.black),
                 calcbuttom('%', Colors.grey, Colors.black),
-                calcbuttom('/', Colors.amber.shade700, Colors.white),
+                calcbuttom('÷', Colors.amber.shade700, Colors.white),
               ],
             ),
             const SizedBox(
@@ -177,13 +197,13 @@ class _CalculatorState extends State<Calculator> {
         finalResult = sub();
       } else if (preOpr == 'x') {
         finalResult = mul();
-      } else if (preOpr == '/') {
+      } else if (preOpr == '÷') {
         finalResult = div();
       }
     } else if (btnText == '+' ||
         btnText == '-' ||
         btnText == 'x' ||
-        btnText == '/' ||
+        btnText == '÷' ||
         btnText == '=') {
       if (numOne == 0) {
         numOne = double.parse(result);
@@ -197,7 +217,7 @@ class _CalculatorState extends State<Calculator> {
         finalResult = sub();
       } else if (opr == 'x') {
         finalResult = mul();
-      } else if (opr == '/') {
+      } else if (opr == '÷') {
         finalResult = div();
       }
       preOpr = opr;
