@@ -114,6 +114,34 @@ class _CalculatorState extends State<Calculator> {
                 calcbuttom('+', Colors.amber.shade700, Colors.white),
               ],
             ),
+             const SizedBox(
+              height: 10,
+            ),
+ Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey.shade800,
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.fromLTRB(34, 20, 128, 20),
+                  ),
+                  onPressed: () {},
+                  child: const Text(
+                    '0',
+                    style: TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                calcbuttom('.', Colors.grey.shade800, Colors.white),
+                calcbuttom('=', Colors.amber.shade700, Colors.white),
+              ],
+            ),
+                        const SizedBox(
+              height: 10,
+            ),
           ], 
         ),
         
