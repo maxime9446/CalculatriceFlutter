@@ -223,12 +223,13 @@ class _CalculatorState extends State<Calculator> {
         btnText == 'x' ||
         btnText == '÷' ||
         btnText == '=') {
-      if (numOne == 0) {
-        numOne = double.parse(result);
-      } else {
-        numTwo = double.parse(result);
+      if (result.isNotEmpty) {
+        if (numOne == 0) {
+          numOne = double.parse(result);
+        } else {
+          numTwo = double.parse(result);
+        }
       }
-
       if (opr == '+') {
         finalResult = add();
       } else if (opr == '-') {
